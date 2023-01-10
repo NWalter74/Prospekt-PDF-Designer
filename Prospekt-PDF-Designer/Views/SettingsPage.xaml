@@ -1,0 +1,57 @@
+﻿<Page Background="White"
+    x:Class="Prospekt_PDF_Designer.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helper="using:Prospekt_PDF_Designer.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    xmlns:xaml="using:Windows.UI.Xaml"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="ElementTheme" />
+    </Page.Resources>
+    <Grid Background="#8EC63F" BorderBrush="Black" BorderThickness="1,1,1,0" Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            x:Uid="Settings_Title" Margin="10,0" Height="30"
+            Style="{StaticResource PageTitleStyle}" />
+
+        <StackPanel Background="#8EC63F" BorderBrush="Black" BorderThickness="0,0,0,1"
+            Grid.Row="1"
+            x:Name="ContentArea">
+            <TextBlock x:Uid="Settings_About" Margin="10"  Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="10" Text="{x:Bind VersionDescription, Mode=OneWay}" />
+            <StackPanel Background="White" BorderBrush="Black" BorderThickness="0,1,0,1" Margin="{StaticResource XSmallTopMargin}">
+
+
+                <TextBlock x:Name="txtServer" Text="Server" Foreground="black" FontSize="25" Width="100" Margin="10,30,0,0" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="txtPort" Text="Port" Foreground="black" FontSize="25" Width="100" Margin="10,20,0,0" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="txtUsername" Text="Username" Foreground="black" FontSize="25" Width="110" Margin="10,20,0,0" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="txtPassword" Text="Password" Foreground="black" FontSize="25" Width="110" Margin="10,20,0,0" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="txtTimeSetter" Text="Ange skrap tid" Foreground="black" FontSize="25" Width="200" Margin="-65,-195,0,0" VerticalAlignment="Top" />
+
+
+                <TextBox x:Name="Server"  Height="35" Width="300" Margin="150,-350,0,0" HorizontalAlignment="Left" BorderThickness="3,3,3,3" BorderBrush="#00ADEF"/>
+                <TextBox x:Name="Port" Height="35" Width="300" Margin="150,-230,50,20" HorizontalAlignment="Left" BorderThickness="3,3,3,3" BorderBrush="#00ADEF"/>
+                <TextBox x:Name="Username" Height="35" Width="300" Margin="150,-120,50,20" HorizontalAlignment="Left" BorderThickness="3,3,3,3" BorderBrush="#00ADEF"/>
+                <PasswordBox x:Name="Password" Height="35" Width="300" Margin="150,-30,50,20" HorizontalAlignment="Left" BorderThickness="3,3,3,3" BorderBrush="#00ADEF"/>
+                <RadioButton x:Name="default1min" Content="1 minute" IsChecked="True" Margin="485,-310,0,0"/>
+                <RadioButton x:Name="time5min" Content="5 minuter" IsChecked="False" Margin="485,-250,0,0"/>
+                <RadioButton x:Name="time10min" Content="10 minuter" IsChecked="False" Margin="485,-190,0,0"/>
+                <RadioButton x:Name="maxTime" Content="max tid 30 minuter" IsChecked="False" Margin="485,-130,0,0"/>
+
+            </StackPanel>
+            <Button x:Name="ApplySettings" Margin="10,30,0,0" CornerRadius="4" Content="applicera" FontSize="12" Width="80" Height="30" Foreground="black" Background="#B8B8B8" BorderBrush="black" BorderThickness="2"
+                     VerticalAlignment="Top" Click="ApplySettings_Click" />
+            <Button x:Name="CancelSettings" Margin="100,-30,0,0" CornerRadius="4" Content="avbryt" FontSize="12" Width="80" Height="30" Foreground="black" Background="#B8B8B8" BorderBrush="Black" BorderThickness="2"
+                    VerticalAlignment="Top" Click="CancelSettings_Click"  />
+
+        </StackPanel>
+    </Grid>
+</Page>

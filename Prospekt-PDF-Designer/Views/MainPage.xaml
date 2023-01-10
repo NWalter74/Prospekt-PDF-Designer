@@ -1,0 +1,499 @@
+﻿<Page
+    x:Class="Prospekt_PDF_Designer.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#8EC63F">
+    <Page.Resources>
+        <Style x:Key="TextBoxStyle1" TargetType="TextBox">
+            <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}"/>
+            <Setter Property="Background" Value="{ThemeResource TextControlBackground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource TextControlBorderBrush}"/>
+            <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextControlSelectionHighlightColor}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+            <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}"/>
+            <Setter Property="ContextFlyout" Value="{StaticResource TextControlCommandBarContextFlyout}"/>
+            <Setter Property="SelectionFlyout" Value="{StaticResource TextControlCommandBarSelectionFlyout}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Grid.Resources>
+                                <Style x:Name="DeleteButtonStyle" TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid x:Name="ButtonLayoutGrid" Background="{ThemeResource TextControlButtonBackground}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{ThemeResource TextControlButtonBorderBrush}">
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal"/>
+                                                            <VisualState x:Name="PointerOver">
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonLayoutGrid" Storyboard.TargetProperty="Background">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlButtonBackgroundPointerOver}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonLayoutGrid" Storyboard.TargetProperty="BorderBrush">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlButtonBorderBrushPointerOver}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GlyphElement" Storyboard.TargetProperty="Foreground">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlButtonForegroundPointerOver}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Pressed">
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonLayoutGrid" Storyboard.TargetProperty="Background">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlButtonBackgroundPressed}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonLayoutGrid" Storyboard.TargetProperty="BorderBrush">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlButtonBorderBrushPressed}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GlyphElement" Storyboard.TargetProperty="Foreground">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlButtonForegroundPressed}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Disabled">
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Duration="0" Storyboard.TargetName="ButtonLayoutGrid" Storyboard.TargetProperty="Opacity" To="0"/>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <TextBlock x:Name="GlyphElement" AutomationProperties.AccessibilityView="Raw" FontStyle="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource TextControlButtonForeground}" FontSize="12" HorizontalAlignment="Center" Text="&#xE10A;" VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlHeaderForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBackgroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBorderBrushDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource Mode=TemplatedParent}, TargetNullValue={ThemeResource TextControlPlaceholderForegroundDisabled}}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBorderBrushPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBackgroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource Mode=TemplatedParent}, TargetNullValue={ThemeResource TextControlPlaceholderForegroundPointerOver}}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlForegroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource Mode=TemplatedParent}, TargetNullValue={ThemeResource TextControlPlaceholderForegroundFocused}}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBackgroundFocused}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBorderBrushFocused}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlForegroundFocused}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="RequestedTheme">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Light"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ButtonStates">
+                                    <VisualState x:Name="ButtonVisible">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DeleteButton" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="ButtonCollapsed"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.ColumnSpan="2" Grid.Column="0" FontWeight="Normal" Foreground="{ThemeResource TextControlHeaderForeground}" Margin="{ThemeResource TextBoxTopHeaderMargin}" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="Collapsed" x:DeferLoadStrategy="Lazy"/>
+                            <Border x:Name="BorderElement" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}" Grid.ColumnSpan="2" Grid.Column="0" Control.IsTemplateFocusTarget="True" MinHeight="{ThemeResource TextControlThemeMinHeight}" MinWidth="{ThemeResource TextControlThemeMinWidth}" Grid.RowSpan="1" Grid.Row="1"/>
+                            <ScrollViewer x:Name="ContentElement" AutomationProperties.AccessibilityView="Raw" Grid.Column="0" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" ZoomMode="Disabled"/>
+                            <TextBlock x:Name="PlaceholderTextContentPresenter" Grid.ColumnSpan="2" Grid.Column="0" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource Mode=TemplatedParent}, TargetNullValue={ThemeResource TextControlPlaceholderForeground}}" IsHitTestVisible="False" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1" Text="{TemplateBinding PlaceholderText}" TextWrapping="{TemplateBinding TextWrapping}" TextAlignment="{TemplateBinding TextAlignment}"/>
+                            <Button x:Name="DeleteButton" AutomationProperties.AccessibilityView="Raw" BorderThickness="{TemplateBinding BorderThickness}" Grid.Column="1" FontSize="{TemplateBinding FontSize}" IsTabStop="False" MinWidth="34" Margin="{ThemeResource HelperButtonThemePadding}" Grid.Row="1" Style="{StaticResource DeleteButtonStyle}" VerticalAlignment="Stretch" Visibility="Collapsed"/>
+                            <ContentPresenter x:Name="DescriptionPresenter" AutomationProperties.AccessibilityView="Raw" Content="{TemplateBinding Description}" Grid.ColumnSpan="2" Grid.Column="0" Foreground="{ThemeResource SystemControlDescriptionTextForegroundBrush}" Grid.Row="2" x:Load="False"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource SmallLeftRightMargin}">
+        <Pivot
+            x:Name="Items" Background="White" Margin="10,15,10,15">
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{Binding}" />
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <PivotItem x:Uid="Main_PivotItem1" Name="Listview_Pivot" Background="White" >
+                <Grid Background="#00ADEF" Margin="10,10,10,10">
+                    <ListView ContainerContentChanging="lvProData_ContainerContentChanging" DoubleTapped="Grid_DoubleTapped_1" BorderBrush="Black" BorderThickness="1" Margin="10,10,10,10" Background="White" x:Name="lvProData" HorizontalAlignment="Left" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid Padding="5" Background="#00ADEF" Width="Auto" BorderThickness="0,0,0,1" BorderBrush="Black" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock  Grid.Column="0" Text="ID" HorizontalAlignment="Left" TextAlignment="Left" 
+                                                Margin="0,0,20,0" Width="Auto" Visibility="Collapsed"/>
+                                    <TextBlock  Grid.Column="1" Text="Skapat datum" HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="15,0,0,0" Width="150"/>
+                                    <TextBlock  Grid.Column="2" Text="Senast ändrat" HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="15,0,0,0" Width="150" />
+                                    <TextBlock Grid.Column="3"  Text="Vem ändrade sist" HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="15,0,0,0" Width="200" />
+                                    <TextBlock  Grid.Column="4"  Text="Användare"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,0,0" Width="100" />
+                                    <TextBlock  Grid.Column="5"  Text="Prospektnamn"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,0,0" Width="200" />
+                                    <TextBlock  Grid.Column="6"  Text="Pro URL"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,10,0" Width="200" />
+                                    <TextBlock  Grid.Column="7"  Text="Allabolag URL" HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,15,0" Width="300" />
+                                    <TextBlock  Grid.Column="8"  Text="EPost"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,0,0" Width="200" />
+                                    <TextBlock  Grid.Column="9" Text="Kommentar"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,0,0" Width="300"/>
+                                    <TextBlock  Grid.Column="10"  Text="URL H1"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,10,0" Width="200"/>
+                                    <TextBlock  Grid.Column="11"  Text="URL H2"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,0,0" Width="200"/>
+                                    <TextBlock  Grid.Column="12"  Text="URL GTM"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="10,0,20,0" Width="200" />
+                                    <TextBlock  Grid.Column="13"  Text="URL GA"  HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="0,0,15,0" Width="200" />
+                                    <TextBlock  Grid.Column="14" Text="URL OrgNo"  HorizontalAlignment="Right" TextAlignment="Left"
+                                                Margin="0,0,10,0" Width="150" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:Name="TableDataTemplate">
+                                <Grid Height="auto" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Row.ItemArray[0]}" HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="0,0,20,0" Width="Auto" Visibility="Collapsed"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Row.ItemArray[1]}" HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="150" />
+                                    <TextBlock Grid.Column="2" Text="{Binding Row.ItemArray[2]}" HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="150"/>
+                                    <TextBlock Grid.Column="3" Text="{Binding Row.ItemArray[3]}" HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200" />
+                                    <TextBlock Grid.Column="4" Text="{Binding Row.ItemArray[4]}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="100" />
+                                    <TextBlock Grid.Column="5" Text="{Binding Row.ItemArray[5]}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200" />
+                                    <TextBlock Grid.Column="6" Text="{Binding Row.ItemArray[6]}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200" />
+                                    <TextBlock Grid.Column="7" Text="{Binding Allabolag}" HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="300"/>
+                                    <TextBlock Grid.Column="8" Text="{Binding Row.ItemArray[8]}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200" />
+                                    <TextBlock Grid.Column="9" Text="{Binding Comment}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="300"/>
+                                    <TextBlock Grid.Column="10" Text="{Binding H1}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200" />
+                                    <TextBlock Grid.Column="11" Text="{Binding H2}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200" />
+                                    <TextBlock Grid.Column="12" Text="{Binding Row.ItemArray[12]}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200" />
+                                    <TextBlock Grid.Column="13" Text="{Binding Row.ItemArray[13]}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200"/>
+                                    <TextBlock Grid.Column="14" Text="{Binding Row.ItemArray[14]}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="150"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </PivotItem>
+
+            <PivotItem x:Uid="Main_PivotItem2" Name="Inputmask_Pivot" Background="White" Margin="10,10,10,10">
+                <Grid Background="White" Margin="0,0,0,0">
+                    <StackPanel Background="#8EC63F">
+                        <Grid Background="#00ADEF" BorderBrush="Black" BorderThickness="1" Margin="10,10,10,170" Height="415"  ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Grid.Row="0" x:Name="ID" Header= "ID" Background="LightGray" HorizontalAlignment="Left" Margin="10,-340,0,0" Width="60" Height="50" FontSize="12"  IsReadOnly="True"/>
+                            <TextBox Grid.Row="0" x:Name="CreatedDatePro" Header= "Skapat datum" Background="LightGray" Margin="-870,-340,0,0" Width="150" Height="50" FontSize="12" IsReadOnly="True"/>
+                            <TextBox Grid.Row="0" x:Name="EditedDate" Header= "Senast ändrat"  Background="LightGray" Margin="-540,-340,0,0" Width="150" Height="50" FontSize="12" IsReadOnly="True"/>
+                            <TextBox Grid.Row="0" x:Name="WhoEdited" Header= "Vem ändrade sist" Background="LightGray" Margin="-60,-340,0,0" Width="300" Height="50" FontSize="12" IsReadOnly="True" />
+                            <TextBox Grid.Row="0" x:Name="UserInitials" Header= "Användare (initialer)" Background="LightGray"  Margin="370,-340,0,0" Width="110" Height="50" FontSize="12" IsReadOnly="True" />
+
+                            <TextBox Grid.Row="0" x:Name="CompanyName" Header= "Prospektnamn" Background="White" HorizontalAlignment="Left" Margin="10,-100,0,0" Width="300" Height="50" FontSize="12" PlaceholderText="Mata in företagsnamn här... det är ett obligatorisk fält" PlaceholderForeground="Red" />
+
+                            <TextBox Grid.Row="0" x:Name="AllabolagURL" Header= "Allabolag.se URL" Background="White" Margin="-240,-100,0,0" Width="300" Height="50" FontSize="12" InputScope="Url" PlaceholderText="Mata in allabolag url här..." />
+                            <TextBox Grid.Row="0" x:Name="Email" Header= "Email" Background="White" Margin="400,-100,0,0" Width="300" Height="50" FontSize="12" InputScope="EmailSmtpAddress" PlaceholderText="Mata in företagets email här..." />
+                            <TextBox Grid.Row="0" x:Name="Comment" Header= "Kommentar" Background="White" HorizontalAlignment="Left" Margin="10,200,0,10" Width="620" Height="190" FontSize="12" Text="" AcceptsReturn="True" TextWrapping="Wrap" PlaceholderText="Mata in en kommentar här..." />
+                            <!--<TextBox Grid.Row="0" x:Name="obligatorisk" Width="100" Height="25" Margin="10,-20,0,10" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" FontSize="10" Foreground="Red" Text="* obligatorisk fält" IsReadOnly="True" TabIndex="0" ></TextBox>-->
+                            <Button Grid.Row="0" x:Name="btnModify" Content="Spara ändrat data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="650, 60, 0, 0" Width="150" Height="30" Click="btnModify_Click"/>
+                        </Grid>
+                        
+                        <Grid Background="#8EC63F" BorderBrush="Black" BorderThickness="1" Height="130" Margin="10,-210, 10, -5" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <TextBox Grid.Row="0" x:Name="SeekAll" Header= "Sök efter prospekt namn, organisation nummer eller Pro URL" HorizontalAlignment="Left" Margin="10, -75, 0, 0" Background="#FFFFFF" Width="350" Height="50" FontSize="12" PlaceholderText="Mata in det du söker här..."/>
+                            <TextBox Grid.Row="0" x:Name="SeekID" Header= "Seek for ID" Background="White" HorizontalAlignment="Right" Margin="0,-80,0,0" Width="60" Height="50" FontSize="12" Visibility="Collapsed" />
+                            <Button Grid.Row="0" x:Name="btnSeek" Content="Sök" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="370, -55, 0,0" Width="80" Height="30" Click="btnSeek_Click"  />
+                            <Button Grid.Row="0" x:Name="btnShowAll" Content="Prospektlista" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="370, 80, 0, 0" Width="110" Height="30" Click="btnShowAll_Click" />
+                            <Button Grid.Row="0" x:Name="btnCancel" Content="Avbryt aktuell prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="520, -60, 0, 0" Width="200" Height="30" Click="btnCancel_Click" />
+                            <Button Grid.Row="0" x:Name="btnDelete" Content="Radera aktuell prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" HorizontalAlignment="Left" Margin="520, 10, 0, 0" Width="200" Height="30" Click="btnDelete_Click" />
+                            <Button Grid.Row="0" x:Name="btnInsert" Content="Lägg in ny prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="520, 80, 0, 0" Width="200" Height="35" Click="btnInsert_Click_1"/>
+                            <Button Grid.Row="0" x:Name="btnSentMail" Content="Skicka prospekt" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="750, -60, 0, 0" Width="150" Height="30" Click="btnSentMail_Click" />
+                            <ListView SelectionMode="Multiple" BorderBrush="Black" BorderThickness="1" Margin="910,20,0,0" Background="White" x:Name="lvmailadresses" HorizontalAlignment="Left" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+                                <ListView.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="2" Background="#00ADEF" Width="Auto" BorderThickness="0,0,0,1" BorderBrush="Black" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="220"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock  Grid.Column="0" Text="Email" HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="0,0,20,0" Width="Auto"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.HeaderTemplate>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:Name="TableDataTemplateMail">
+                                        <Grid Height="auto" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Row.ItemArray[2], Mode=TwoWay}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <TextBlock Grid.Row="0" x:Name="txtcurrentCompany" Margin="10,40,0,0" Text ="Aktuell prospekt: " Width="120"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="0" x:Name="currentCompany" Margin="140,40,0,0" Width="160"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="0" x:Name="txtcurrentLogIn" Margin="10,80,0,0" Text ="Inloggad användare: " Width="120"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="0" x:Name="currentLogin" Margin="140, 80,0,0" Width="160"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+
+            <PivotItem x:Uid="Main_PivotItem3" Name="Scrap_Pivot" Background="White" Margin="10,10,10,10">
+                <Grid Background="White" Margin="0,0,0,0">
+                    <StackPanel Background="#8EC63F">
+                        <Grid Background="#00ADEF" BorderBrush="Black" BorderThickness="1" Margin="10,10,10,170" Height="415" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Grid.Row="0" x:Name="ProURL" Header= "Pro URL" Background="White" HorizontalAlignment="Left" Margin="10,-150,0,0" Width="300" Height="50" FontSize="12" IsEnabled="True" Text="" PlaceholderText="https://www.finnmera.se"/>
+                            <Button Grid.Row="0" x:Name="btnGetData" Content="Skrapa sidan" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="330, -130, 0, 0" Width="100" Height="30" Click="btnGetData_Click" IsEnabled="False"/>
+
+                            <TextBox Grid.Row="0" x:Name="URLH1" Header= "URL H1" Background="White" HorizontalAlignment="Left" Margin="10,10,0,0" Width="300" Height="100" FontSize="12" Text="" AcceptsReturn="True" />
+                            <TextBox Grid.Row="0" x:Name="URLH2" Header= "URL H2" Background="White" Margin="-230,10,0,0" Width="300" Height="100" FontSize="12" Text="" AcceptsReturn="True" />
+
+                            <TextBox Grid.Row="0" x:Name="URLGTM" Header= "URL GTM" Background="White" HorizontalAlignment="Left" Margin="10,160,0,0" Width="300" Height="50" FontSize="12" Text="" AcceptsReturn="True" />
+                            <TextBox Grid.Row="0" x:Name="URLGA" Header= "URL GA" Background="White" Margin="-230,160,0,0" Width="300" Height="50" FontSize="12" Text="" AcceptsReturn="True" />
+                            <TextBox Grid.Row="0" x:Name="URLORGNR" Header= "URL Orgnr" Background="White" Margin="410,160,0,0" Width="300" Height="50" FontSize="12" Text="" AcceptsReturn="True" />
+
+                            <Button Grid.Row="0" x:Name="btnModifyScrap" Content="Spara ändrat skrapat data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="650, -20, 0, 0" Width="200" Height="30" Click="btnModify_Click"/>
+                            <Button Grid.Row="0" x:Name="btnCancelScrap" Content="Radera aktuell skrapat data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="650, 70, 0, 0" Width="200" Height="30" Click="btnCancelScrap_Click" />
+                        </Grid>
+                        <Grid Background="#8EC63F" BorderBrush="Black" BorderThickness="1" Height="130" Margin="10,-210, 10, -5" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <TextBox Grid.Row="0" x:Name="SeekAllScrap" Header= "Sök efter prospekt namn, organisation nummer eller Pro URL" HorizontalAlignment="Left" Margin="10, -75, 0, 0" Background="#FFFFFF" Width="350" Height="50" FontSize="12" PlaceholderText="Mata in det du söker här..."/>
+                            <TextBox Grid.Row="0" x:Name="SeekIDscrap" Header= "Seek for ID" Background="White" HorizontalAlignment="Right" Margin="0,-80,0,0" Width="60" Height="50" FontSize="12" Visibility="Collapsed" />
+                            <Button Grid.Row="0" x:Name="btnSeekscrap" Content="Sök" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="370, -55, 0,0" Width="80" Height="30" Click="btnSeek_Click"  />
+                            <Button Grid.Row="0" x:Name="btnShowAllScrap" Content="Prospektlista" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="370, 80, 0, 0" Width="110" Height="30" Click="btnShowAll_Click" />
+                            <Button Grid.Row="0" x:Name="btnCanclScrap" Content="Avbryt aktuell prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="520, -60, 0, 0" Width="200" Height="30" Click="btnCancel_Click" />
+                            <Button Grid.Row="0" x:Name="btnDeleteScrap" Content="Radera aktuell prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" HorizontalAlignment="Left" Margin="520, 10, 0, 0" Width="200" Height="30" IsEnabled="False" />
+                            <Button Grid.Row="0" x:Name="btnInsertScrap" Content="Lägg in ny prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="520, 80, 0, 0" Width="200" Height="35" IsEnabled="False" />
+                            <Button Grid.Row="0" x:Name="btnSentMailScrap" Content="Skicka prospekt" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="750, -60, 0, 0" Width="150" Height="30" Click="btnSentMailScrap_Click" />
+                            <ListView SelectionMode="Multiple" BorderBrush="Black" BorderThickness="1" Margin="910,20,0,0" Background="White" x:Name="lvmailadressesScrap" HorizontalAlignment="Left" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+                                <ListView.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="2" Background="#00ADEF" Width="Auto" BorderThickness="0,0,0,1" BorderBrush="Black" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="220"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock  Grid.Column="0" Text="Email" HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="0,0,20,0" Width="Auto"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.HeaderTemplate>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:Name="TableDataTemplateMailScrap">
+                                        <Grid Height="auto" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Row.ItemArray[2], Mode=TwoWay}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <TextBlock Grid.Row="0" x:Name="txtcurrentCompanyScrap" Margin="10,40,0,0" Text ="Aktuell prospekt: " Width="120"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="0" x:Name="currentCompanyScrap" Margin="140,40,0,0" Width="160"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="0" x:Name="txtcurrentLogInScrap" Margin="10,80,0,0" Text ="Inloggad användare: " Width="120"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="0" x:Name="currentLoginscrap" Margin="140, 80,0,0" Width="160"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+
+            <PivotItem x:Uid="Main_PivotItem4" Name="Result_Pivot" Background="White" Margin="10,10,10,10">
+                <Grid Background="White" Margin="0,0,0,0">
+                    <StackPanel Background="#8EC63F">
+                        <StackPanel Background="#8EC63F">
+                            <Grid Background="#00ADEF" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,10,10,170" Height="415" Width="1040" HorizontalAlignment="Left" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" x:Name="txtscrapingGTM" Margin="20,10,0,0" Width="160"  Height="auto" Text="Resultat skraping GTM:" FontWeight="ExtraBlack" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="0" x:Name="txtscrapingUA" Margin="211,10,0,0" Width="169"  Height="auto" Text="Resultat skraping GA(UA):" FontWeight="ExtraBlack" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="0" x:Name="txtscrapingH1" Margin="410,10,0,0" Width="160"  Height="auto" Text="Resultat skraping H1:" FontWeight="ExtraBlack" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="0" x:Name="txtscrapingH2" Margin="610,10,0,0" Width="160"  Height="auto" Text="Resultat skraping H2:" FontWeight="ExtraBlack" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="0" x:Name="txtscrapingOrg" Margin="810,10,0,0" Width="160"  Height="auto" Text="Resultat OrgNummer:" FontWeight="ExtraBlack" HorizontalAlignment="Left"/>
+                                <Grid Grid.Row="1" Background="White" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,-20,10,10" Height="360" Width="1015" HorizontalAlignment="Left">
+                                    <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+                                        <RelativePanel Height="auto" Width="1015" Margin="0,0,0,0">
+                                            <TextBlock x:Name="txtscrapingResultGTM" Margin="10,0,0,0"  Width="160" Height="auto" Text="" TextWrapping="Wrap" RelativePanel.AlignLeftWithPanel="True"/>
+                                            <TextBlock x:Name="txtscrapingResultUA" Margin="200,0,0,0" Width="160"  Height="auto" Text="" TextWrapping="Wrap" RelativePanel.AlignLeftWith="txtscrapingResultGTM"/>
+                                            <TextBlock x:Name="txtscrapingResultH1" Margin="400,0,0,0" Width="160"  Height="auto" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" RelativePanel.AlignLeftWith="txtscrapingResultUA"/>
+                                            <TextBlock x:Name="txtscrapingResultH2" Margin="600,0,0,0" Width="160"  Height="auto" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" RelativePanel.AlignLeftWith="txtscrapingResultH1"/>
+                                            <TextBlock x:Name="txtscrapingResultOrg" Margin="800,0,0,0" Width="160" Height="auto" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" RelativePanel.AlignLeftWith="txtscrapingResultH2"/>
+                                        </RelativePanel>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Grid>
+                            <Button Grid.Row="0" x:Name="btnCancelScrapResult" Content="Avbryt resultat data" Background="#B8B8B8" BorderBrush="Black" CornerRadius="4" Margin="1052,-1140,0,0" Width="150" Height="30" Click="btnCancelScrapResult_Click"/>
+                            <Button Grid.Row="0" x:Name="btnApplyScrapResult" Content="Använd resultat data" Background="#B8B8B8" BorderBrush="Black" CornerRadius="4" Margin="1052,-1050,0,0" Width="160" Height="30" Click="btnApplyScrap_Click" />
+                            <Grid Background="#8EC63F" BorderBrush="Black" BorderThickness="1" Height="130" Margin="10,-210, 10, -5" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                <TextBox Grid.Row="0" x:Name="SeekAllResult" Header= "Sök efter prospekt namn, organisation nummer eller Pro URL" HorizontalAlignment="Left" Margin="10, -75, 0, 0" Background="White" Width="350" Height="50" FontSize="12" PlaceholderText="Mata in det du söker här..."/>
+                                <TextBox Grid.Row="0" x:Name="SeekIDResult" Header= "Seek for ID" Background="White" HorizontalAlignment="Right" Margin="0,-80,0,0" Width="60" Height="50" FontSize="12" Visibility="Collapsed" />
+                                <Button Grid.Row="0" x:Name="btnSeekResult" Content="Sök" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="370, -55, 0,0" Width="80" Height="30" Click="btnSeek_Click"  />
+                                <Button Grid.Row="0" x:Name="btnShowAllResult" Content="Prospektlista" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="370, 80, 0, 0" Width="110" Height="30" Click="btnShowAll_Click" />
+                                <Button Grid.Row="0" x:Name="btnCancelResult" Content="Avbryt aktuell prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="520, -60, 0, 0" Width="200" Height="30" Click="btnCancel_Click" />
+                                <Button Grid.Row="0" x:Name="btnDeleteResult" Content="Radera  aktuell prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" HorizontalAlignment="Left" Margin="520, 10, 0, 0" Width="200" Height="30" IsEnabled="False" />
+                                <Button Grid.Row="0" x:Name="btnInsertResult" Content="Lägg in ny prospekt data" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="520, 80, 0, 0" Width="200" Height="35" IsEnabled="False"/>
+                                <Button Grid.Row="0" x:Name="btnSentMailResult" Content="Skicka prospekt" Background="#B8B8B8" BorderBrush="#0D0D0D" CornerRadius="4" Margin="750, -60, 0, 0" Width="150" Height="30" Click="btnSentMailResult_Click" />
+                                <ListView SelectionMode="Multiple" BorderBrush="Black" BorderThickness="1" Margin="910,20,0,0" Background="White" x:Name="lvmailadressesResult" HorizontalAlignment="Left" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+                                    <ListView.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid Padding="2" Background="#00ADEF" Width="Auto" BorderThickness="0,0,0,1" BorderBrush="Black" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="220"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock  Grid.Column="0" Text="Email" HorizontalAlignment="Left" TextAlignment="Left"
+                                                Margin="0,0,20,0" Width="Auto"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.HeaderTemplate>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:Name="TableDataTemplateMailResult">
+                                            <Grid Height="auto" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding Row.ItemArray[2], Mode=TwoWay}"  HorizontalAlignment="Left" TextAlignment="Left"
+                                               Margin="10,0,5,0" Width="200"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <TextBlock Grid.Row="0" x:Name="txtcurrentCompanyResult" Margin="10,40,0,0" Text ="Aktuell prospekt: " Width="120"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="0" x:Name="currentCompanyResult" Margin="140,40,0,0" Width="160"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="0" x:Name="txtcurrentLogInResult" Margin="10,80,0,0" Text ="Inloggad användare: " Width="120"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="0" x:Name="currentLoginResult" Margin="140, 80,0,0" Width="160"  Height="50" TextWrapping="WrapWholeWords" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
+
